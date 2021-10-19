@@ -8,9 +8,11 @@ class Oystercard
     @maximum_balance = 90
   end
   def top_up(amount)
-   p  @balance += amount
-    fail "Over card limit" if @balance >= @maximum_balance
-   @balance 
+    @balance += amount
+    fail "Over card limit of #{@maximum_balance}" if @balance >= @maximum_balance
+    @balance 
   end
-
+  def deduct(amount)
+    @balance -= amount
+  end 
 end
