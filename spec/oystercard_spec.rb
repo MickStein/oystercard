@@ -6,4 +6,8 @@ describe Oystercard do
 
     expect(card.balance).to eq 0
   end
+  it 'should add money to balance'do 
+  card = Oystercard.new 
+  expect(card.top_up(10)).to eq 10 
+  end   
 end
