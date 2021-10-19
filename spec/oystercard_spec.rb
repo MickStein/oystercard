@@ -6,6 +6,7 @@ describe Oystercard do
 
     expect(card.balance).to eq 0
   end
+
   it 'should add money to balance'do 
   card = Oystercard.new 
 
@@ -16,32 +17,47 @@ describe Oystercard do
     card = Oystercard.new
     expect { card.top_up(91) }.to raise_error "Over card limit of 90"
   end 
+
   it 'should deduct money from balance'do 
     card = Oystercard.new
     card.top_up(20)
     expect(card.deduct(1.80)).to eq 18.20
   end 
+
   it "should touch in" do
     card = Oystercard.new
+    card.top_up(5)
 
     expect(card.touch_in).to eq true
   end
+
   it "should touch out" do
     card = Oystercard.new
+    card.top_up(5)
 
     expect(card.touch_out).to eq false
   end
+
   it "should return true when in use" do
     card = Oystercard.new
+    card.top_up(5)
     card.touch_in
 
-    expect(card.in_journey).to eq true
+    expect(card.in_journey?).to eq true
   end
+
   it "should return false when not in journey" do
     card = Oystercard.new
+    card.top_up(5)
     card.touch_in
     card.touch_out
 
-    expect(card.in_journey).to eq false
+    expect(card.in_journey?).to eq false
+  end
+
+  it "should throw error when not enough funds for travel" do
+    card = Oystercard.new
+
+    expect{card.touch_in.balance < 1}.to raise_error "Not enough funds"
   end
 end
