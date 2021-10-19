@@ -21,4 +21,27 @@ describe Oystercard do
     card.top_up(20)
     expect(card.deduct(1.80)).to eq 18.20
   end 
+  it "should touch in" do
+    card = Oystercard.new
+
+    expect(card.touch_in).to eq true
+  end
+  it "should touch out" do
+    card = Oystercard.new
+
+    expect(card.touch_out).to eq false
+  end
+  it "should return true when in use" do
+    card = Oystercard.new
+    card.touch_in
+
+    expect(card.in_journey).to eq true
+  end
+  it "should return false when not in journey" do
+    card = Oystercard.new
+    card.touch_in
+    card.touch_out
+
+    expect(card.in_journey).to eq false
+  end
 end
