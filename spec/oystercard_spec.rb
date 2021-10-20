@@ -60,4 +60,13 @@ describe Oystercard do
 
     expect{card.touch_in.balance < 1}.to raise_error "Not enough funds"
   end
+
+  it "should deduct the correct amount from the card" do
+    card = Oystercard.new
+    card.top_up(10)
+    card.touch_in
+    card.touch_out
+
+    expect(card.balance).to eq 9
+  end
 end
