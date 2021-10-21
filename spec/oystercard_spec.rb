@@ -65,8 +65,7 @@ describe Oystercard do
     card = Oystercard.new
     card.top_up(10)
     card.touch_in
-    card.touch_out
 
-    expect(card.balance).to eq 9
+    expect {card.touch_out}.to change{card.balance}.by(-card.fare)
   end
 end
